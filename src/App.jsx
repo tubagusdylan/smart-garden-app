@@ -10,11 +10,11 @@ function App() {
     <>
       <div>
         <TopBar />
-        <div>
-          <div className="mt-16 hidden">
+        <div className="lg:flex w-full">
+          <div className="hidden lg:block lg:w-[20%]">
             <SideBar />
           </div>
-          <div className="mt-32 px-4 lg:px-0">
+          <div className="mt-32 lg:mt-[66px] px-4 lg:px-0 lg:w-[80%]">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/control" element={<Control />} />

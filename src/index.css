@@ -5,3 +5,7 @@
 * {
   @apply box-border;
 }
+
+.active {
+  @apply bg-teal-400 text-opacity-100;
+}
