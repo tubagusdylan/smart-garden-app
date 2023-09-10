@@ -44,7 +44,7 @@ const Dashboard = () => {
           </button>
         </header>
 
-        <section id="sensor" className="flex flex-wrap w-full gap-6 lg:gap-0">
+        <section id="sensor" className="flex flex-wrap w-full gap-6 md:gap-0">
           {sensors.map((sensor, index) => {
             return (
               <>
