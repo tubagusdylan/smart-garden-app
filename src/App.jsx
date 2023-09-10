@@ -17,6 +17,14 @@ function App() {
     setClient(clientMqtt);
   };
 
+  const handleClientDisconnect = () => {
+    if (client) {
+      client.end(() => {
+        setMqttStatus("disconnect");
+      });
+    }
+  };
+
   useEffect(() => {
     client?.on("connect", () => {
       setMqttStatus("connected");
@@ -27,7 +35,7 @@ function App() {
   return (
     <>
       <div>
-        <TopBar connect={handleClientConnect} status={mqttStatus} />
+        <TopBar connect={handleClientConnect} status={mqttStatus} disconnect={handleClientDisconnect} />
         <div className="lg:flex w-full">
           <div className="hidden lg:block lg:w-[20%]">
             <SideBar />

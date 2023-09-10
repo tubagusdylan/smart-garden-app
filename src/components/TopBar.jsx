@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import SideBar from "./SideBar";
 
-const TopBar = ({ connect, status }) => {
+const TopBar = ({ connect, status, disconnect }) => {
   const url = "wss://broker.emqx.io:8084/mqtt";
   const option = {
     keepalive: 60,
@@ -23,10 +23,16 @@ const TopBar = ({ connect, status }) => {
             </div>
             <div className="flex items-center gap-5">
               <div className={`w-[20px] h-[20px] rounded-full ${status === "connected" ? "bg-green-400" : "bg-red-400"}`}></div>
-              <span className="hidden lg:inline">Connected to broker: {status === "connected" ? <b>wss://broker.emqx.io:8084/mqtt</b> : ""}</span>
-              <button className="py-2 px-4 bg-teal-500 rounded-full text-white" onClick={() => connect(url, option)}>
-                {status === "connected" ? "Disconnect" : "Connect"}
-              </button>
+              <span className="hidden lg:inline">Connected to broker: {status === "connected" ? <b>{url}</b> : ""}</span>
+              {status === "connected" ? (
+                <button className="py-2 px-4 bg-teal-500 rounded-full text-white hover:bg-teal-400 active:bg-teal-800" onClick={() => disconnect()}>
+                  Disconnect
+                </button>
+              ) : (
+                <button className="py-2 px-4 bg-teal-500 rounded-full text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-teal-400 active:bg-teal-800" onClick={() => connect(url, option)} disabled={status === "connecting"}>
+                  Connect
+                </button>
+              )}
             </div>
           </div>
         </div>
