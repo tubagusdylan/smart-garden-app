@@ -2,8 +2,8 @@ import { AiOutlineDownload } from "react-icons/ai";
 import { TbTemperatureCelsius } from "react-icons/tb";
 import { WiHumidity } from "react-icons/wi";
 import { BsMoisture } from "react-icons/bs";
-
 import SensorCard from "../components/SensorCard";
+import ChartCard from "../components/ChartCard";
 
 const sensors = [
   {
@@ -44,11 +44,21 @@ const Dashboard = () => {
           </button>
         </header>
 
-        <section id="sensor" className="flex flex-wrap w-full gap-6 md:gap-0">
+        <section id="sensor" className="flex flex-wrap w-full gap-6 md:gap-0 mb-10">
           {sensors.map((sensor, index) => {
             return (
               <>
                 <SensorCard key={index} name={sensor.name} data={sensor.data} icon={sensor.icon} borderColor={sensor.borderColor} />
+              </>
+            );
+          })}
+        </section>
+
+        <section id="chart-sensor" className="flex flex-wrap w-full gap-6 md:gap-0">
+          {sensors.map((sensor, index) => {
+            return (
+              <>
+                <ChartCard key={index} datas={sensor.data} name={sensor.name} borderColor={sensor.borderColor} />
               </>
             );
           })}
