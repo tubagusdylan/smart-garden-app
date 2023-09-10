@@ -40,7 +40,7 @@ function App() {
           <div className="hidden lg:block lg:w-[20%]">
             <SideBar />
           </div>
-          <div className="mt-32 lg:mt-[66px] px-4 lg:px-0 lg:w-[80%]">
+          <div className="mt-32 lg:mt-[66px] px-4 lg:p-4 lg:w-[80%]">
             <Routes>
               <Route path="/" element={<Dashboard client={client} />} />
               <Route path="/control" element={<Control />} />
