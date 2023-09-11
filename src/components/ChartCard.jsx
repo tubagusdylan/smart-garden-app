@@ -1,33 +1,49 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LineChart from "./LineChart";
 
 Chart.register(CategoryScale);
 
 /* eslint-disable react/prop-types */
-const ChartCard = ({ name, datas, borderColor }) => {
+const ChartCard = ({ name, datas, chartColor }) => {
   /*
     publish json (ini setelah subcribe, diparsing dulu agar formatnya menjadi begini)-> datas: {
         msg,
         updatedAt
     }
   */
+  const [updatedAt, setUpdatedAt] = useState([]);
+  const [message, setMessage] = useState([]);
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
       {
         label: name,
         data: [],
-        borderColor: borderColor,
+        borderColor: chartColor,
         borderWidth: 2,
       },
     ],
   });
 
-  setInterval(() => {
-    setChartData(datas);
-  }, 5000);
+  useEffect(() => {
+    setMessage((current) => [...current, datas?.msg]);
+    setUpdatedAt((current) => [...current, datas?.updatedAt]);
+    setChartData({
+      ...chartData,
+      labels: updatedAt,
+      datasets: [
+        {
+          label: name,
+          data: message,
+          borderColor: chartColor,
+          borderWidth: 2,
+        },
+      ],
+    });
+  }, [datas]);
 
   return (
     <>

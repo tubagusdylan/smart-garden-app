@@ -10,8 +10,9 @@ import { connect } from "mqtt";
 function App() {
   const [client, setClient] = useState(null);
   const [mqttStatus, setMqttStatus] = useState("disconnect");
-  const [subcribeTopic, setSubcribeTopic] = useState("testtopic/#");
-  const [publishTopic, setPublishTopic] = useState("testtopic/#");
+  const [subcribeTopic, setSubcribeTopic] = useState("smartgarden/iot/tebe");
+  const [publishTopic, setPublishTopic] = useState("smartgarden/iot");
+  const [msgPayload, setMsgPayload] = useState({});
 
   const handleClientConnect = (url, option) => {
     setMqttStatus("connecting");
@@ -36,6 +37,9 @@ function App() {
   useEffect(() => {
     client?.on("connect", () => {
       setMqttStatus("connected");
+      client.subscribe(subcribeTopic, { qos: 2 }, (error) => {
+        if (error) return;
+      });
     });
     client?.on("error", (err) => {
       console.error("Connection error: ", err);
@@ -43,6 +47,14 @@ function App() {
     });
     client?.on("reconnect", () => {
       setMqttStatus("Reconnecting");
+    });
+  }, [client, subcribeTopic]);
+
+  useEffect(() => {
+    client?.on("message", (topic, message) => {
+      const payload = JSON.parse(message);
+      console.log(payload);
+      setMsgPayload(payload);
     });
   }, [client]);
 
@@ -56,7 +68,7 @@ function App() {
           </div>
           <div className="mt-32 lg:mt-[66px] px-4 lg:p-4 lg:w-[80%]">
             <Routes>
-              <Route path="/" element={<Dashboard client={client} />} />
+              <Route path="/" element={<Dashboard payload={msgPayload} />} />
               <Route path="/control" element={<Control />} />
               <Route path="/setting" element={<Settings subcribeTopic={subcribeTopic} publishTopic={publishTopic} onChangeSubcribeTopic={handleSubcribeTopic} onChangePublishTopic={handlePublishTopic} />} />
             </Routes>
