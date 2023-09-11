@@ -10,8 +10,8 @@ import { connect } from "mqtt";
 function App() {
   const [client, setClient] = useState(null);
   const [mqttStatus, setMqttStatus] = useState("disconnect");
-  const [subcribeTopic, setSubcribeTopic] = useState("");
-  const [publishTopic, setPublishTopic] = useState("");
+  const [subcribeTopic, setSubcribeTopic] = useState("testtopic/#");
+  const [publishTopic, setPublishTopic] = useState("testtopic/#");
 
   const handleClientConnect = (url, option) => {
     setMqttStatus("connecting");

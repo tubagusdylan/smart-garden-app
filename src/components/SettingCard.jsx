@@ -40,7 +40,7 @@ const SettingCard = (props) => {
           <h4>This web is {name === "Subcribe" ? "Subcribed" : "Published"} to topic: </h4>
           <b>{name === "Subcribe" ? subcribeTopic : publishTopic}</b>
         </div>
-        <div className="w-[30%] bg-teal-700 flex justify-center items-center text-teal-950">{icon}</div>
+        <div className="w-[30%] bg-teal-700 flex justify-center items-center text-white text-opacity-30">{icon}</div>
       </div>
     </div>
   );
