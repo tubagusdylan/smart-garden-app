@@ -35,7 +35,7 @@ const SettingCard = (props) => {
                   }
             }
           >
-            {name}
+            Set topic
           </button>
           <h4>This web is {name === "Subcribe" ? "Subcribed" : "Published"} to topic: </h4>
           <b>{name === "Subcribe" ? subcribeTopic : publishTopic}</b>
