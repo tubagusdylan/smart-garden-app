@@ -10,25 +10,39 @@ import { connect } from "mqtt";
 function App() {
   const [client, setClient] = useState(null);
   const [mqttStatus, setMqttStatus] = useState("disconnect");
+  const [subcribeTopic, setSubcribeTopic] = useState("");
+  const [publishTopic, setPublishTopic] = useState("");
 
   const handleClientConnect = (url, option) => {
     setMqttStatus("connecting");
-    const clientMqtt = connect(url, option);
-    setClient(clientMqtt);
+    setClient(connect(url, option));
   };
 
   const handleClientDisconnect = () => {
-    if (client) {
-      client.end(() => {
-        setMqttStatus("disconnect");
-      });
-    }
+    client?.end(() => {
+      setMqttStatus("disconnect");
+      setClient(null);
+    });
+  };
+
+  const handleSubcribeTopic = () => {
+    setSubcribeTopic(subcribeTopic);
+  };
+
+  const handlePublishTopic = () => {
+    setPublishTopic(publishTopic);
   };
 
   useEffect(() => {
     client?.on("connect", () => {
       setMqttStatus("connected");
-      console.log("mqtt connected");
+    });
+    client?.on("error", (err) => {
+      console.error("Connection error: ", err);
+      client.end();
+    });
+    client?.on("reconnect", () => {
+      setMqttStatus("Reconnecting");
     });
   }, [client]);
 
@@ -44,7 +58,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard client={client} />} />
               <Route path="/control" element={<Control />} />
-              <Route path="/setting" element={<Settings />} />
+              <Route path="/setting" element={<Settings subcribeTopic={subcribeTopic} publishTopic={publishTopic} onChangeSubcribeTopic={handleSubcribeTopic} onChangePublishTopic={handlePublishTopic} />} />
             </Routes>
           </div>
         </div>
