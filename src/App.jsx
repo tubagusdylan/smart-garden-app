@@ -25,12 +25,12 @@ function App() {
     });
   };
 
-  const handleSubcribeTopic = () => {
-    setSubcribeTopic(subcribeTopic);
+  const handleSubcribeTopic = (topic) => {
+    setSubcribeTopic(topic);
   };
 
-  const handlePublishTopic = () => {
-    setPublishTopic(publishTopic);
+  const handlePublishTopic = (topic) => {
+    setPublishTopic(topic);
   };
 
   useEffect(() => {

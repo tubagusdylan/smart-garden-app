@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import SettingCard from "../components/SettingCard";
 import { HiSaveAs, HiUpload } from "react-icons/hi";
 
@@ -12,7 +13,9 @@ const setMqtt = [
   },
 ];
 
-const Settings = () => {
+const Settings = (props) => {
+  const { subcribeTopic, onChangeSubcribeTopic, publishTopic, onChangePublishTopic } = props;
+
   return (
     <div className="bg-white">
       <div className="container mx-auto">
@@ -22,7 +25,7 @@ const Settings = () => {
 
         <section id="subcribe-topic" className="flex flex-wrap w-full gap-6 lg:gap-0">
           {setMqtt.map((value, index) => {
-            return <SettingCard key={index} name={value.name} icon={value.icon} />;
+            return <SettingCard key={index} name={value.name} icon={value.icon} subcribeTopic={subcribeTopic} publishTopic={publishTopic} onChangeSubcribeTopic={onChangeSubcribeTopic} onChangePublishTopic={onChangePublishTopic} />;
           })}
         </section>
       </div>
