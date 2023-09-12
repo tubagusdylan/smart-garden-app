@@ -13,7 +13,6 @@ function App() {
   const [mqttStatus, setMqttStatus] = useState("disconnect");
   const [subcribeTopic, setSubcribeTopic] = useState("smartgarden/iot/tebe");
   const [publishTopic, setPublishTopic] = useState("smartgarden/iot");
-  const [msgPayload, setMsgPayload] = useState({});
 
   const handleClientConnect = (url, option) => {
     setMqttStatus("connecting");
@@ -54,7 +53,7 @@ function App() {
   useEffect(() => {
     client?.on("message", (topic, message) => {
       const payload = JSON.parse(message);
-      setMsgPayload(payload);
+
       sensors[0].data = payload.temp;
       sensors[0].msgArray.push(payload.temp);
       sensors[0].timeArray.push(payload.updatedAt);
@@ -83,7 +82,7 @@ function App() {
           </div>
           <div className="mt-32 lg:mt-[66px] px-4 lg:p-4 lg:w-[80%]">
             <Routes>
-              <Route path="/" element={<Dashboard payload={msgPayload} />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="/control" element={<Control />} />
               <Route path="/setting" element={<Settings subcribeTopic={subcribeTopic} publishTopic={publishTopic} onChangeSubcribeTopic={handleSubcribeTopic} onChangePublishTopic={handlePublishTopic} />} />
             </Routes>
