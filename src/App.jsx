@@ -70,8 +70,6 @@ function App() {
       sensors[3].data = payload.pH;
       sensors[3].msgArray.push(payload.pH);
       sensors[3].timeArray.push(payload.updatedAt);
-
-      console.log(payload);
     });
   }, [client]);
 
