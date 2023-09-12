@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
@@ -13,6 +14,7 @@ function App() {
   const [mqttStatus, setMqttStatus] = useState("disconnect");
   const [subcribeTopic, setSubcribeTopic] = useState("smartgarden/iot/tebe");
   const [publishTopic, setPublishTopic] = useState("smartgarden/iot");
+  const [msgPayload, setMsgPayload] = useState({});
 
   const handleClientConnect = (url, option) => {
     setMqttStatus("connecting");
@@ -52,7 +54,8 @@ function App() {
 
   useEffect(() => {
     client?.on("message", (topic, message) => {
-      const payload = JSON.parse(message);
+      let payload = JSON.parse(message);
+      setMsgPayload(payload); // agar dilakukan rerender
 
       sensors[0].data = payload.temp;
       sensors[0].msgArray.push(payload.temp);
