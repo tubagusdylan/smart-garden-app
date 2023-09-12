@@ -1,71 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { AiOutlineDownload } from "react-icons/ai";
-import { TbTemperatureCelsius } from "react-icons/tb";
-import { WiHumidity } from "react-icons/wi";
-import { BsMoisture } from "react-icons/bs";
 import SensorCard from "../components/SensorCard";
 import ChartCard from "../components/ChartCard";
-import { useEffect } from "react";
+import { sensors } from "../utils/Sensors";
 
-const sensors = [
-  {
-    name: "Temperature",
-    data: 0,
-    icon: <TbTemperatureCelsius size={40} className="text-slate-500 text-opacity-40" />,
-    borderColor: "border-l-sky-500",
-    chartColor: "#0ea5e9",
-    msgArray: [],
-    timeArray: [],
-  },
-  {
-    name: "Humidity",
-    data: 0,
-    icon: <WiHumidity size={40} className="text-slate-500 text-opacity-40" />,
-    borderColor: "border-l-orange-500",
-    chartColor: "#f97316",
-    msgArray: [],
-    timeArray: [],
-  },
-  {
-    name: "Moisture",
-    data: 0,
-    icon: <BsMoisture size={30} className="text-slate-500 text-opacity-40" />,
-    borderColor: "border-l-rose-950",
-    chartColor: "#4c0519",
-    msgArray: [],
-    timeArray: [],
-  },
-  {
-    name: "pH",
-    data: 0,
-    icon: <BsMoisture size={30} className="text-slate-500 text-opacity-40" />,
-    borderColor: "border-l-yellow-500",
-    chartColor: "#eab308",
-    msgArray: [],
-    timeArray: [],
-  },
-];
-
-const Dashboard = ({ payload }) => {
-  useEffect(() => {
-    sensors[0].data = payload.temp;
-    sensors[0].msgArray.push(payload.temp);
-    sensors[0].timeArray.push(payload.updatedAt);
-
-    sensors[1].data = payload.hum;
-    sensors[1].msgArray.push(payload.hum);
-    sensors[1].timeArray.push(payload.updatedAt);
-
-    sensors[2].data = payload.moisture;
-    sensors[2].msgArray.push(payload.moisture);
-    sensors[2].timeArray.push(payload.updatedAt);
-
-    sensors[3].data = payload.pH;
-    sensors[3].msgArray.push(payload.pH);
-    sensors[3].timeArray.push(payload.updatedAt);
-  }, [payload]);
-
+const Dashboard = () => {
   return (
     <div className="bg-white">
       <div className="container mx-auto">

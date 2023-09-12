@@ -6,6 +6,7 @@ import SideBar from "./components/SideBar";
 import Settings from "./pages/Settings";
 import TopBar from "./components/TopBar";
 import { connect } from "mqtt";
+import { sensors } from "./utils/Sensors";
 
 function App() {
   const [client, setClient] = useState(null);
@@ -53,8 +54,24 @@ function App() {
   useEffect(() => {
     client?.on("message", (topic, message) => {
       const payload = JSON.parse(message);
-      console.log(payload);
       setMsgPayload(payload);
+      sensors[0].data = payload.temp;
+      sensors[0].msgArray.push(payload.temp);
+      sensors[0].timeArray.push(payload.updatedAt);
+
+      sensors[1].data = payload.hum;
+      sensors[1].msgArray.push(payload.hum);
+      sensors[1].timeArray.push(payload.updatedAt);
+
+      sensors[2].data = payload.moisture;
+      sensors[2].msgArray.push(payload.moisture);
+      sensors[2].timeArray.push(payload.updatedAt);
+
+      sensors[3].data = payload.pH;
+      sensors[3].msgArray.push(payload.pH);
+      sensors[3].timeArray.push(payload.updatedAt);
+
+      console.log(payload);
     });
   }, [client]);
 
