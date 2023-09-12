@@ -4,6 +4,7 @@ import { BsMoisture } from "react-icons/bs";
 
 export const sensors = [
   {
+    id: 1,
     name: "Temperature",
     data: 0,
     icon: <TbTemperatureCelsius size={40} className="text-slate-500 text-opacity-40" />,
@@ -13,6 +14,7 @@ export const sensors = [
     timeArray: [],
   },
   {
+    id: 2,
     name: "Humidity",
     data: 0,
     icon: <WiHumidity size={40} className="text-slate-500 text-opacity-40" />,
@@ -22,6 +24,7 @@ export const sensors = [
     timeArray: [],
   },
   {
+    id: 3,
     name: "Moisture",
     data: 0,
     icon: <BsMoisture size={30} className="text-slate-500 text-opacity-40" />,
@@ -31,6 +34,7 @@ export const sensors = [
     timeArray: [],
   },
   {
+    id: 4,
     name: "pH",
     data: 0,
     icon: <BsMoisture size={30} className="text-slate-500 text-opacity-40" />,

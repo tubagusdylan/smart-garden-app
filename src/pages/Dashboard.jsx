@@ -18,22 +18,14 @@ const Dashboard = () => {
         </header>
 
         <section id="sensor" className="flex flex-wrap w-full gap-6 md:gap-0 mb-10">
-          {sensors.map((sensor, index) => {
-            return (
-              <>
-                <SensorCard key={index} name={sensor.name} data={sensor.data} icon={sensor.icon} borderColor={sensor.borderColor} />
-              </>
-            );
+          {sensors.map((sensor) => {
+            return <SensorCard key={sensor.id} name={sensor.name} data={sensor.data} icon={sensor.icon} borderColor={sensor.borderColor} />;
           })}
         </section>
 
         <section id="chart-sensor" className="flex flex-wrap w-full gap-6 md:gap-0">
-          {sensors.map((sensor, index) => {
-            return (
-              <>
-                <ChartCard key={index} message={sensor.msgArray} timeArray={sensor.timeArray} name={sensor.name} chartColor={sensor.chartColor} />
-              </>
-            );
+          {sensors.map((sensor) => {
+            return <ChartCard key={sensor.id} message={sensor.msgArray} timeArray={sensor.timeArray} name={sensor.name} chartColor={sensor.chartColor} />;
           })}
         </section>
       </div>
