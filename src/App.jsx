@@ -97,3 +97,6 @@ function App() {
 }
 
 export default App;
+
+// TODO: Di App bikin fungsi handleActuatorChange, bikin kondisi menggunakan index,
+// !! Kalau index terpilih lakukan publish berdasarkan topic per object di actuators tersebut.

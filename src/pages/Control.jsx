@@ -19,4 +19,7 @@ const Control = () => {
   );
 };
 
+// TODO: Kirim index dan value ke actuator Card, di aktuator card, panggil fungsi dari App
+// TODO: lalu kirim value dan index yang terpilih ke App.
+
 export default Control;
