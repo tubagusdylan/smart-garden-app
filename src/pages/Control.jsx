@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import ActuatorCard from "../components/ActuatorCard";
-import { actuators } from "../utils/Actuators";
 
-const Control = () => {
+const Control = ({ onActuatorChange, actuators }) => {
   return (
     <div className="bg-white">
       <div className="container mx-auto">
@@ -11,15 +11,12 @@ const Control = () => {
 
         <section id="subcribe-topic" className="flex flex-wrap w-full gap-10 lg:gap-0 mb-8">
           {actuators.map((actuator) => {
-            return <ActuatorCard key={actuator.id} name={actuator.name} topic={actuator.topic} status={actuator.status} />;
+            return <ActuatorCard key={actuator.id} actuator={actuator} onActuatorChange={onActuatorChange} />;
           })}
         </section>
       </div>
     </div>
   );
 };
-
-// TODO: Kirim index dan value ke actuator Card, di aktuator card, panggil fungsi dari App
-// TODO: lalu kirim value dan index yang terpilih ke App.
 
 export default Control;

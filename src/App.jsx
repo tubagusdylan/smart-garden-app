@@ -15,6 +15,32 @@ function App() {
   const [subcribeTopic, setSubcribeTopic] = useState("smartgarden/iot/tebe");
   const [publishTopic, setPublishTopic] = useState("smartgarden/iot");
   const [msgPayload, setMsgPayload] = useState({});
+  const [actuators, setActuators] = useState([
+    {
+      id: 1,
+      name: "Actuator 1",
+      topic: "actuator1",
+      status: "OFF",
+    },
+    {
+      id: 2,
+      name: "Actuator 2",
+      topic: "actuator2",
+      status: "OFF",
+    },
+    {
+      id: 3,
+      name: "Actuator 3",
+      topic: "actuator3",
+      status: "OFF",
+    },
+    {
+      id: 4,
+      name: "Actuator 4",
+      topic: "actuator4",
+      status: "OFF",
+    },
+  ]);
 
   const handleClientConnect = (url, option) => {
     setMqttStatus("connecting");
@@ -34,6 +60,32 @@ function App() {
 
   const handlePublishTopic = (topic) => {
     setPublishTopic(topic);
+  };
+
+  const handleActuatorChange = (id) => {
+    let msg;
+    let newActuator;
+
+    const index = actuators.findIndex((value) => {
+      return value.id === id;
+    });
+
+    const currentActuator = actuators[index];
+
+    if (currentActuator.status === "OFF") {
+      msg = JSON.stringify({ payload: 1 });
+      newActuator = { ...currentActuator, status: "ON" };
+      actuators.splice(index, 1, newActuator);
+      client?.publish(`${publishTopic}/${currentActuator.topic}`, msg);
+      setActuators(actuators);
+      return;
+    }
+
+    msg = JSON.stringify({ payload: 0 });
+    newActuator = { ...currentActuator, status: "OFF" };
+    actuators.splice(index, 1, newActuator);
+    client?.publish(`${publishTopic}/${currentActuator.topic}`, msg);
+    setActuators(actuators);
   };
 
   useEffect(() => {
@@ -86,7 +138,7 @@ function App() {
           <div className="mt-32 lg:mt-[66px] px-4 lg:p-4 lg:w-[80%]">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/control" element={<Control />} />
+              <Route path="/control" element={<Control onActuatorChange={handleActuatorChange} actuators={actuators} />} />
               <Route path="/setting" element={<Settings subcribeTopic={subcribeTopic} publishTopic={publishTopic} onChangeSubcribeTopic={handleSubcribeTopic} onChangePublishTopic={handlePublishTopic} />} />
             </Routes>
           </div>
@@ -97,6 +149,3 @@ function App() {
 }
 
 export default App;
-
-// TODO: Di App bikin fungsi handleActuatorChange, bikin kondisi menggunakan index,
-// !! Kalau index terpilih lakukan publish berdasarkan topic per object di actuators tersebut.
