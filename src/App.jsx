@@ -138,7 +138,7 @@ function App() {
           <div className="mt-32 lg:mt-[66px] px-4 lg:p-4 lg:w-[80%]">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/control" element={<Control onActuatorChange={handleActuatorChange} actuators={actuators} />} />
+              <Route path="/control" element={<Control onActuatorChange={handleActuatorChange} actuators={actuators} publishTopic={publishTopic} />} />
               <Route path="/setting" element={<Settings subcribeTopic={subcribeTopic} publishTopic={publishTopic} onChangeSubcribeTopic={handleSubcribeTopic} onChangePublishTopic={handlePublishTopic} />} />
             </Routes>
           </div>

@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 
 const ActuatorCard = (props) => {
-  const { actuator, onActuatorChange } = props;
+  const { actuator, onActuatorChange, publishTopic } = props;
 
   return (
     <div className="w-full lg:w-1/2 xl:w-1/4 lg:mb-8">
@@ -10,7 +10,9 @@ const ActuatorCard = (props) => {
         <header className="w-1/2 lg:w-full">
           <h1 className="text-lg font-semibold">{actuator.name}</h1>
           <span>
-            <i>Topic will be: {actuator.topic}</i>
+            <i className="text-sm text-slate-500">
+              Topic will be: {publishTopic}/{actuator.topic}
+            </i>
           </span>
         </header>
         <div className="w-1/2 lg:w-full text-center lg:mt-3">
