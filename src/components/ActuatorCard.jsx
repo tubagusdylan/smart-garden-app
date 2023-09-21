@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { useState } from "react";
-
 const ActuatorCard = (props) => {
   const { actuator, onActuatorChange } = props;
 
@@ -16,12 +14,14 @@ const ActuatorCard = (props) => {
           </span>
         </header>
         <div className="w-1/2 lg:w-full text-center lg:mt-3">
-          <input type="checkbox" className="invisible" id={actuator.name} onChange={() => onActuatorChange(actuator.id)} />
-          <label htmlFor={actuator.name}>
-            <div className="w-[80px] h-9 rounded-full bg-slate-300 flex items-center px-1 cursor-pointer">
-              <div className="w-7 h-7 bg-white rounded-full "></div>
-            </div>
-          </label>
+          <div className="flex justify-between lg:block">
+            <input type="checkbox" className="invisible" id={actuator.name} onChange={() => onActuatorChange(actuator.id)} />
+            <label htmlFor={actuator.name}>
+              <div className="w-[80px] h-9 rounded-full bg-slate-300 flex items-center px-1 cursor-pointer toggle transition duration-200 ease-in-out">
+                <div className="w-7 h-7 bg-white rounded-full toggle-circle transition duration-200 ease-in-out"></div>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
     </div>

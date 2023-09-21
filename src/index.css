@@ -9,3 +9,11 @@
 .active {
   @apply bg-teal-400 text-opacity-100;
 }
+
+input[type="checkbox"]:checked ~ label div.toggle {
+  @apply bg-teal-400;
+}
+
+input[type="checkbox"]:checked ~ label div.toggle-circle {
+  @apply translate-x-11;
+}
