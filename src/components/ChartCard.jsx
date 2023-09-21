@@ -1,20 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CategoryScale } from "chart.js";
+/* eslint-disable react/prop-types */
+import { CategoryScale, LineElement, LinearScale, PointElement } from "chart.js";
 import Chart from "chart.js/auto";
-// import { useState, useEffect } from "react";
 import LineChart from "./LineChart";
 
-Chart.register(CategoryScale);
+Chart.register(CategoryScale, LineElement, LinearScale, PointElement);
 
-/* eslint-disable react/prop-types */
 const ChartCard = ({ name, message, timeArray, chartColor }) => {
-  /*
-    publish json (ini setelah subcribe, diparsing dulu agar formatnya menjadi begini)-> datas: {
-        msg,
-        updatedAt
-    }
-  */
-
   let chartData = {
     labels: timeArray,
     datasets: [
