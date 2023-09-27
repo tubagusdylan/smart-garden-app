@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { RiComputerFill } from "react-icons/ri";
-import { AiOutlineDashboard, AiOutlineControl, AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineDashboard, AiOutlineControl, AiOutlineSetting, AiOutlineTool } from "react-icons/ai";
 
 const menus = [
   {
@@ -18,6 +18,11 @@ const menus = [
     link: "Setting MQTT",
     path: "/setting",
     icon: <AiOutlineSetting size={25} />,
+  },
+  {
+    link: "Tutorial",
+    path: "/tutorial",
+    icon: <AiOutlineTool size={25} />,
   },
 ];
 
