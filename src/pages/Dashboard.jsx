@@ -10,7 +10,7 @@ const Dashboard = () => {
     <div className="bg-white">
       <div className="container mx-auto">
         <header className="flex justify-between items-center mb-8">
-          <h1 className="text-xl lg:text-2xl">Dashboard</h1>
+          <h1 className="text-xl lg:text-3xl">Dashboard</h1>
           <button className="bg-teal-500 py-1 px-3 text-white rounded-full hover:bg-teal-400 active:bg-teal-800 flex gap-2 items-center">
             <AiOutlineDownload />
             CSV

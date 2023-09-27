@@ -6,7 +6,7 @@ const Control = ({ onActuatorChange, actuators, publishTopic }) => {
     <div className="bg-white">
       <div className="container mx-auto">
         <header className="mb-8">
-          <h1 className="text-xl lg:text-2xl">Control Actuators</h1>
+          <h1 className="text-xl lg:text-3xl">Control Actuators</h1>
         </header>
 
         <section id="subcribe-topic" className="flex flex-wrap w-full gap-10 lg:gap-0 mb-8">
