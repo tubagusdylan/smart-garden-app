@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import Control from "./pages/Control";
-import SideBar from "./components/SideBar";
 import Settings from "./pages/Settings";
+import Tutorial from "./pages/Tutorial";
 import TopBar from "./components/TopBar";
+import SideBar from "./components/SideBar";
 import { connect } from "mqtt";
 import { sensors } from "./utils/Sensors";
 
@@ -140,6 +141,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/control" element={<Control onActuatorChange={handleActuatorChange} actuators={actuators} publishTopic={publishTopic} />} />
               <Route path="/setting" element={<Settings subcribeTopic={subcribeTopic} publishTopic={publishTopic} onChangeSubcribeTopic={handleSubcribeTopic} onChangePublishTopic={handlePublishTopic} />} />
+              <Route path="/tutorial" element={<Tutorial />} />
             </Routes>
           </div>
         </div>
