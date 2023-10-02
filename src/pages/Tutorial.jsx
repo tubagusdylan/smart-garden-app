@@ -47,7 +47,7 @@ const Tutorial = () => {
           <img src={sketch} alt="" className="mx-auto lg:mx-0 rounded-lg" />
         </section>
 
-        <section id="mqtt-section" className="mb-5">
+        <section id="wifi-section" className="mb-5">
           <h2 className="font-semibold mb-2 text-lg">Connect to Wifi</h2>
           <p className="leading-loose mb-2">Here is the code for connecting ESP32 to MQTT Broker. First, you have to connect your ESP32 to Wifi. In order to add the built-in ESP32 library, you have to select the board to be ESP32.</p>
           <img src={board} alt="" className="mx-auto lg:mx-0 rounded-lg mb-2" />
@@ -80,7 +80,71 @@ const Tutorial = () => {
             <span>{"\t\tSerial.print('.');\n"}</span>
             <span>{"\t\tdelay(500);\n"}</span>
             <span>{"\t}\n"}</span>
-            <span>{"\tSerial.print('Wifi Connected to ')\n"}</span>
+            <span>{"\tSerial.print('Wifi Connected to ');\n"}</span>
+            <span>{"\tSerial.println(ssid);\n"}</span>
+            <span>{"}"}</span>
+          </pre>
+        </section>
+
+        <section id="mqtt-section" className="mb-5">
+          <h2 className="font-semibold mb-2 text-lg">Connect to MQTT</h2>
+          <p className="leading-loose mb-2">
+            After the ESP32 connected to Wifi, ESP32 must connect to same MQTT Broker for communicating with this website. You can go to <strong>{"File > Examples > PubSubClient > mqtt_esp8266"}</strong> for example code, but it is using
+            ESP8266 Board that have a little different Wifi Library. However, the code for connecting to MQTT Broker is still same. Or you can follow the code below.
+          </p>
+          <pre className="border border-slate-400 bg-slate-300 py-3 px-4 text-slate-500 rounded-lg h-[400px] overflow-auto">
+            <span>{"#include <WiFi.h>\n"}</span>
+            <span className="text-black">{"#include <PubSubClient.h>\n\n"}</span>
+            <span>{"const char* "}</span>
+            <span>ssid = </span>
+            <span>{'"your-ssid";\n'}</span>
+            <span>{"const char* "}</span>
+            <span>password = </span>
+            <span>{'"your-password";\n'}</span>
+            <span className="text-black">
+              <span>{"const char* "}</span>
+              <span>mqtt_broker = </span>
+              <span>{'"broker.emqx.io";\n\n'}</span>
+            </span>
+            <span className="text-black">{"WiFiClient espClient;\n"}</span>
+            <span className="text-black">{"PubSubClient client(espClient);\n\n"}</span>
+            <span>{"void setup(){\n"}</span>
+            <span>{"\tSerial.begin(115200);\n"}</span>
+            <span>{"\tconnectWifi();\n"}</span>
+            <span className="text-black">{"\tclient.setServer(mqtt_broker, 1883);\n"}</span>
+            <span>{"}\n\n"}</span>
+            <span>{"void loop(){\n"}</span>
+            <span className="text-black">
+              <span>{"\tif(!client.connected()){\n"}</span>
+              <span>{"\t\treconnect();\n"}</span>
+              <span>{"\t}\n"}</span>
+              <span>{"\tclient.loop();\n"}</span>
+            </span>
+            <span>{"}\n\n"}</span>
+            <span className="text-black">
+              <span>{"void reconnect(){\n"}</span>
+              <span>{"\tif(client.connect('ESP32_Client')){\n"}</span>
+              <span>{"\t\tSerial.print('MQTT Connected to ');\n"}</span>
+              <span>{"\t\tSerial.prinln(mqtt_broker);\n"}</span>
+              <span>{"\t\treturn;\n"}</span>
+              <span>{"\t}\n"}</span>
+              <span>{"\tSerial.println('Try again after 3 seconds...');\n"}</span>
+              <span>{"\tdelay(3000);\n"}</span>
+              <span>{"}\n\n"}</span>
+            </span>
+            <span>{"void "}</span>
+            <span>{"connectWifi(){\n"}</span>
+            <span>{"\tSerial.println('Connecting to Wifi...');\n"}</span>
+            <span>{"\tWiFi.begin(ssid, password);\n"}</span>
+            <span>
+              {"\twhile ("}
+              <span>{"WiFi.status() "}</span>
+              {"!= WL_CONNECTED){\n"}
+            </span>
+            <span>{"\t\tSerial.print('.');\n"}</span>
+            <span>{"\t\tdelay(500);\n"}</span>
+            <span>{"\t}\n"}</span>
+            <span>{"\tSerial.print('Wifi Connected to ');\n"}</span>
             <span>{"\tSerial.println(ssid);\n"}</span>
             <span>{"}"}</span>
           </pre>
